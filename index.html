@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Zillow Hackathon</title>
+
+	<link rel="stylesheet" type="text/css" href="home.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="home.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<form>
+			<label class="input-label">
+				What is your household income?
+				<input type="text" name="householdIncome" placeholder="$ Enter your household income">
+			</label>
+
+			<label class="input-label">
+				How many people will be moving in?
+				<input type="text" name="numberOfResidents" placeholder="Enter the number of people">
+			</label>
+
+			<label class="input-label">
+				Where would you like to live?
+				<input type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
+			</label>
+
+			<label class="input-label">Are you a veteran?</label>
+			<label class="radio-label">
+				No
+				<input type="radio" name="veteran" value="no" checked="checked">
+			</label>
+			<label class="radio-label">
+				Yes
+				<input type="radio" name="veteran" value="yes">
+			</label>
+
+			<label class="input-label">Are you disabled?</label>
+			<label class="radio-label">
+				No
+				<input type="radio" name="disabled" value="no" checked="checked">
+			</label>
+			<label class="radio-label">
+				Yes
+				<input type="radio" name="disabled" value="yes">
+			</label>
+
+			<input type="submit" value="Continue" class="continue">
+		</form>
+	</div>
+</body>
+</html>
