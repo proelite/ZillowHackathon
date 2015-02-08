@@ -1,24 +1,13 @@
 <?php
 
-// Login using default unsecure username/pw
-$db = mysqli_connect("localhost", "root");
-
-if (mysqli_connect_errno()) 
-{
-	echo "Couldn't connect to database. Ask Phil for credentials.";
-}
-
-if(!mysqli_select_db($db, "test"))
-{
-	echo "Couldn't connect to database. Ask Phil for help.";
-}
+require("db-connect.php");
 
 function getNearestSchoolScore($lat, $lon)
 {
 	global $db;
 	$query = "SELECT Name, parentRating FROM `schools` ORDER BY ABS(schools.lat-$lat)+ABS(schools.lon-($lon)) ASC LIMIT 1,1";
 	$responseFromQuery = mysqli_query($db, $query) or die ("WHAT");
-	$response = mysqli_fetch_row($responseFromQuery);
+	$response = mysqli_fetch_row($responseFromQuery) or die ("BLARG");
 	if(!$response) return Array();
 	return $response;
 }
@@ -34,6 +23,5 @@ if (isset($_GET['json']) && $_GET['json'] == 1)
 	echo json_encode($response);
 }
 
-if(isset($db))
-	mysqli_close($db);
+require("db-close.php");
 ?>
