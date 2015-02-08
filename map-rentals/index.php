@@ -23,15 +23,15 @@ require("index-controller.php");
 		
 	<script type="text/javascript">
 
-	  const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-	  const apikey = '&key=AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
+		const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+		const apikey = '&key=AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
 
-	  var initialLocation;
-	  var seattle = new google.maps.LatLng(47.61460,-122.31704);
-	  var browserSupportFlag =  new Boolean();
-	  var map;
-	  var widget;
-	  var loaded = false;
+	 	var initialLocation;
+		var seattle = new google.maps.LatLng(47.61460,-122.31704);
+		var browserSupportFlag =  new Boolean();
+		var map;
+		var widget;
+		var loaded = false;
 
 		var pointarray, heatmap;
 
@@ -50,7 +50,7 @@ require("index-controller.php");
 		?>
 		];
 
-	  var buildings = 
+	 	var buildings = 
 		<?php
 			echo '\'{"Buildings":[';
 			if(isset($output["buildings"]) && !empty($output["buildings"]))
@@ -113,11 +113,10 @@ require("index-controller.php");
 			echo ']}\';'
 		?>
 	  
-	  var buildingsJson;
-	  var infoWindow;
+	  	var buildingsJson;
+	  	var infoWindow;
 
-	  function initialize() {
-
+	  	function initialize() {
 	  	infoWindow = new google.maps.InfoWindow(
 	  		{
 	  			content:"null"
