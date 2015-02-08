@@ -58,16 +58,24 @@ if ($buildingIDResult->num_rows > 0)
 {
 	echo '<table border ="1">';
 	echo '<tr> <th> Project Name </th> <th> Building Name </th>';
-	echo '<th> Address </th> <th> Available Units </th> <th> Income Limit </th></tr>';
+	echo '<th> Available Units </th> <th> Income Limit </th>';
+	echo '<th> Details </th> </tr>';
 	while ($row = $buildingIDResult->fetch_assoc())
 	{
 		$availableUnits = $row['TOTAL_UNITS'] - $row['TOTAL_OCCUPIED'];
 	
 		echo '<tr>';
 		echo '<td>' . $row['PROJECT_NAME'] . '</td><td> ' . $row['BUILDING_NAME'] . '</td>';
-		echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td>'; 
+		//echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td>'; 
 		echo '<td>' . $availableUnits . '</td>';
 		echo '<td>' . '$' . $row['IncomeLimit'] . '</td>';
+		
+		echo '<td> <form action="HousingDetails.php">';
+		echo '<button type="submit" value="' . $row['NATIONAL_BUILDING_ID'] . '" name="NatBuildingID">Details</button>';
+		echo '</form>';
+		
+		echo '</td>';
+		
 		echo '</tr>';
 	}
 
