@@ -1,7 +1,5 @@
 <?php
 
-// XXX TODO Use Kalapana's APIs to get actual crime data for a particular lat/lon
-
 require_once('../db-connect.php');
 require('../apis/getClosestCrimeData.php');
 
