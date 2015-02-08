@@ -6,8 +6,9 @@ function getNearestSchoolScore($lat, $lon)
 {
 	global $db;
 	$query = "SELECT Name, parentRating FROM `schools` ORDER BY ABS(schools.lat-$lat)+ABS(schools.lon-($lon)) ASC LIMIT 1,1";
-	$responseFromQuery = mysqli_query($db, $query) or die ("WHAT");
-	$response = mysqli_fetch_row($responseFromQuery) or die ("BLARG");
+	$responseFromQuery = mysqli_query($db, $query) or die ("Error in query");
+
+	$response = mysqli_fetch_row($responseFromQuery);
 	if(!$response) return Array();
 	return $response;
 }

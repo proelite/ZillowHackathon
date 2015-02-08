@@ -27,13 +27,13 @@
 		if (!file_exists($filename))
 		{
 			$filename = "./schools-near-$city.xml";
-			if (!file_exists($filename)) die("Yo, there aint no xml shizzle!");
+			if (!file_exists($filename)) die("Missing XML data");
 		}
 		$string = file_get_contents($filename);
 		
 		$xml = new SimpleXMLElement($string);
 		$schools = $xml->xpath("/schools/school");
-		if (!$schools) die("WHAT DID YOU DO?");
+		if (!$schools) die("Corrupt XML file");
 		if ($schools)
 		{
 			foreach($schools as $school)
