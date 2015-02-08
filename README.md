@@ -6,6 +6,8 @@ This webservice was developed as part of the weekend (Feb 6 '15 - Feb 8 '15) hac
 ![Homepage](Homepage.png)
 ![Housing listing page](Screenshot.jpg)
 
+More details, check our presentation (https://github.com/proelite/ZillowHackathon/blob/master/Findr.pdf)
+
 ## Challenge and Approach
 
 Our submission is for [lower-income renters].
