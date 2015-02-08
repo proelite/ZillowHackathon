@@ -18,7 +18,7 @@ $queryResult = mysqli_stmt_get_result($stmt);
 
 if ($queryResult->num_rows > 0)
 {
-	echo '<table border ="1">';
+	echo '<table style="border-collapse: collapse; font-size: 0.75em; font-style: Helvetica; color: #333;">';
 	while ($row = $queryResult->fetch_assoc())
 	{
 		$availableUnits = $row['TOTAL_UNITS'] - $row['TOTAL_OCCUPIED'];
@@ -27,21 +27,20 @@ if ($queryResult->num_rows > 0)
 	
 		$schoolRow = getNearestSchoolScore($row['LATITUDE'], $row['LONGITUDE']);
 	
-		echo '<tr><td>Project Name</td>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Project Name</td>';
 		echo '<td>' . $row['PROJECT_NAME'] . '</td></tr>';
 		
-		echo '<tr><td>Building Name</td> <td> ' . $row['BUILDING_NAME'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Building Name</td> <td> ' . $row['BUILDING_NAME'] . '</td></tr>';
 		
-		echo '<tr><td>Address Name</td>';
+		echo '<tr style="border-bottom: 1px solid #ccc"><td style="color: #0074e4; font-weight: bold;">Address Name</td>';
 		echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td></tr>'; 
-		echo '<tr><td>Available Units</td><td>' . $availableUnits . '</td></tr>';
-		echo '<tr><td>Total Units</td><td>' . $row['TOTAL_UNITS'] . '</td></tr>';
-		echo '<tr><td>Nearest School </td><td>' . $schoolRow['0'] . '</td></tr>';
-		echo '<tr><td>School Score </td><td>' . $schoolRow['1'] . '</td></tr>';
-		echo '<tr><td>Housing Authority</td><td>' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
-		echo '<tr><td>Phone Number</td><td>' . $row['ContactNumber'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Available Units</td><td>' . $availableUnits . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Total Units</td><td>' . $row['TOTAL_UNITS'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Nearest School </td><td>' . $schoolRow['0'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">School Score </td><td>' . $schoolRow['1'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Housing Authority</td><td>' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Phone Number</td><td>' . $row['ContactNumber'] . '</td></tr>';
 		echo '</td>';
-		
 		echo '</tr>';
 	}
 
