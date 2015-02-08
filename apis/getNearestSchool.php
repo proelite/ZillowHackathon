@@ -1,6 +1,6 @@
 <?php
 
-require("db-connect.php");
+require("../db-connect.php");
 
 function getNearestSchoolScore($lat, $lon)
 {
@@ -24,5 +24,5 @@ if (isset($_GET['json']) && $_GET['json'] == 1)
 	echo json_encode($response);
 }
 
-require("db-close.php");
+require("../db-close.php");
 ?>
