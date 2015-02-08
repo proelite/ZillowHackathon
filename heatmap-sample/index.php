@@ -40,7 +40,8 @@ var crimeData = [
 		{
 			$lat = $crimeLatLon["lat"];
 			$lon = $crimeLatLon["lon"];
-			echo "new google.maps.LatLng($lat, $lon),";
+			$weight = $crimeLatLon["weight"];
+			echo "new google.maps.LatLng($lat, $lon, $weight),";
 		}
 	}
 ?>
@@ -49,7 +50,7 @@ var crimeData = [
 function initialize() {
   var mapOptions = {
     zoom: 13,
-    center: new google.maps.LatLng(37.774546, -122.433523),
+    center: new google.maps.LatLng(47.61460, -122.31704),
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
 
