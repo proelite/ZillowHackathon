@@ -15,7 +15,7 @@
     <script type="text/javascript">
 
       const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-      const apikey = 'AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
+      const apikey = '&key=AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
 
       var initialLocation;
       var seattle = new google.maps.LatLng(47.61460,-122.31704);
@@ -65,7 +65,30 @@
 
     function submitLocation() 
     {
+      var address = document.getElementById("addressInput").value;
+      var url = geocodeapi+address+apikey;
+      var json = JSON.parse(httpGet(url));
+      if (json.status=="OK") 
+      {
+        var latlng = json.results[0].geometry.location;
 
+        map.setCenter(new google.maps.LatLng(latlng.lat, latlng.lng));
+        widget.setOrigin(''+latlng.lat+','+latlng.lng);
+      }
+      else
+      {
+        alert("Please enter a valid address");
+      }
+    }
+
+    function httpGet(theUrl)
+    {
+        var xmlHttp = null;
+
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
     }
 
     </script>
@@ -74,7 +97,7 @@
     <div class="container">
           <label class="input-label">
             Where do you work?
-          <input type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
+          <input id = "addressInput" type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
           </label>
           <button type="button" onclick="submitLocation()">See Homes</button> 
     </div>
