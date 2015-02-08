@@ -1,5 +1,6 @@
 <?php
 // Connect and setup db
+require_once("../apis/GetNearestSchool.php");
 require_once('../db-connect.php');
 
 $buildingID = $_GET['NatBuildingID'];
@@ -22,6 +23,10 @@ if ($queryResult->num_rows > 0)
 	{
 		$availableUnits = $row['TOTAL_UNITS'] - $row['TOTAL_OCCUPIED'];
 	
+		
+	
+		$schoolRow = getNearestSchoolScore($row['LATITUDE'], $row['LONGITUDE']);
+	
 		echo '<tr><td>Project Name</td>';
 		echo '<td>' . $row['PROJECT_NAME'] . '</td></tr>';
 		
@@ -30,6 +35,9 @@ if ($queryResult->num_rows > 0)
 		echo '<tr><td>Address Name</td>';
 		echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td></tr>'; 
 		echo '<tr><td>Available Units</td><td>' . $availableUnits . '</td></tr>';
+		echo '<tr><td>Total Units</td><td>' . $row['TOTAL_UNITS'] . '</td></tr>';
+		echo '<tr><td>Nearest School </td><td>' . $schoolRow['0'] . '</td></tr>';
+		echo '<tr><td>School Score </td><td>' . $schoolRow['1'] . '</td></tr>';
 		echo '<tr><td>Housing Authority</td><td>' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
 		echo '<tr><td>Phone Number</td><td>' . $row['ContactNumber'] . '</td></tr>';
 		echo '</td>';
