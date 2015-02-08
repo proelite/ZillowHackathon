@@ -316,7 +316,7 @@ body {
   <body onload="initialize()">
   	<div class="header">
 		<a href="/index.html">
-			<img src="/Findr8-mix.png">
+			<img src="../Findr8-mix.png">
 		</a>
 		<span class="container">
 		  <label class="input-label" style="margin: 5px">
@@ -326,10 +326,8 @@ body {
 		  <button type="button" onclick="submitLocation()">Center map here</button> 
 		</span>
 	</div>
-	<div style="float:left; width:120px;" class="left-gutter">
-		<table>
-			<tr><td></td></tr>
-		</table>
+	<div style="float:left; width:240px; height: 640px;" class="left-gutter">
+		<iframe height="100%" width="240px" src="../list-rentals/?householdIncome=<?php echo $input['householdIncome'] . "&numberOfResidents=" . $input['numberOfResidents'] . "&location=" . $input['location'] ?>"></iframe>
 	</div>
 	<div style="width:auto;" id="map-canvas"></div>
   </body>
