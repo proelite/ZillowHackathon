@@ -1,8 +1,39 @@
-AuthorityID,Family Size,Income Limit
-HA City of Everett,,
-HA City of Renton,,
-HA OF  KING COUNTY,,
-Housing Authority of Snohomish County,,
+HousingAuthorityName,FamilySize,IncomeLimit
+HA City of Everett,1,30900
+HA City of Everett,2,35300
+HA City of Everett,3,39700
+HA City of Everett,4,44100
+HA City of Everett,5,47650
+HA City of Everett,6,51200
+HA City of Everett,7,54700
+HA City of Everett,8,58250
+HA City of Renton,1,30900
+HA City of Renton,2,35300
+HA City of Renton,3,39700
+HA City of Renton,4,44100
+HA City of Renton,5,47650
+HA City of Renton,6,51200
+HA City of Renton,7,54700
+HA City of Renton,8,58250
+HA OF  KING COUNTY,1,44750
+HA OF  KING COUNTY,2,51150
+HA OF  KING COUNTY,3,57550
+HA OF  KING COUNTY,4,63900
+HA OF  KING COUNTY,5,69050
+HA OF  KING COUNTY,6,74150
+HA OF  KING COUNTY,7,79250
+HA OF  KING COUNTY,8,84350
+HA OF  KING COUNTY,9,89450
+HA OF  KING COUNTY,10,94550
+HA OF  KING COUNTY,11,99700
+Housing Authority of Snohomish County,1,30900
+Housing Authority of Snohomish County,2,35300
+Housing Authority of Snohomish County,3,39700
+Housing Authority of Snohomish County,4,44100
+Housing Authority of Snohomish County,5,47650
+Housing Authority of Snohomish County,6,51200
+Housing Authority of Snohomish County,7,54700
+Housing Authority of Snohomish County,8,58250
 Seattle Housing Authority,1,44750
 Seattle Housing Authority,2,51150
 Seattle Housing Authority,3,57550
