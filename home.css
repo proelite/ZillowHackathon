@@ -30,11 +30,15 @@ body {
 	font-weight: bold;
 }
 
+.container .radio-label-container {
+	padding: 1em 0;
+}
+
 .container .radio-label {
 	box-sizing: border-box;
 	color: #FFF;
 	font-size: 1.125em;
-	margin: 1em 2em;
+	margin: 0 2em;
 }
 
 .container .radio-label input {
@@ -54,4 +58,24 @@ body {
 	margin: 1em 0;
 	padding: 1em;
 	width: 100%;
+}
+
+.container .continue {
+	background-color: #74c005;
+	border: none;
+	border-radius: 4px;
+	box-sizing: border-box;
+	color: #FFF;
+	display: block;
+	margin: 0 auto;
+	padding: 1em;
+	text-align: center;
+	width: 50%;
+}
+
+.container .continue:hover {
+    background: -webkit-linear-gradient(#74c005, #68AD04); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#74c005, #68AD04); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#74c005, #68AD04); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#74c005, #68AD04); /* Standard syntax (must be last) */
 }
