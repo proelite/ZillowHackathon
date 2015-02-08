@@ -32,11 +32,16 @@ if (!$selectDB)
    
 $query = "Select *";
 $query .= " FROM HUDHousingInfo, FamilySizeIncomeLimits";
-$query .= " (WHERE (HUDHousingInfo.Housing_Authority == FamilySizeIncomeLimits.HousingAuthorityName)";
-$query .= " AND (FamilySizeIncomeLimits.FamilySize == ))";
+$query .= " WHERE HUDHousingInfo.Housing_Authority = FamilySizeIncomeLimits.HousingAuthorityName";
+$query .= " AND FamilySizeIncomeLimits.FamilySize = ?";
+$query .= " AND FamilySizeIncomeLimits.IncomeLimit >= ?";
+$stmt = mysqli_prepare($db, $query);
+
+mysqli_stmt_bind_param($stmt, 'ii', $numberOfResidents, $input['householdIncome']);
+
+mysqli_stmt_execute($stmt);
+$buildingIDResult = mysqli_stmt_get_result($stmt);
    
-$buildingIDResult = mysqli_query($db, "Select * FROM HUDHousingInfo");   
-  
 if (!$buildingIDResult)
 {
 	 echo "Failed Query </br> ";
