@@ -69,8 +69,6 @@ else
  	$sqlText2 .= 'FIELDS TERMINATED BY "," ';
  	$sqlText2 .= 'LINES TERMINATED BY "\r\n" ';
  	$sqlText2 .= 'IGNORE 1 LINES ';
-	
-	echo $sqlText2 . "</br>";
   
  	$loadHudHousingData = mysqli_query($conn, $sqlText2);
 
