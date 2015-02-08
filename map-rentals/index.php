@@ -343,7 +343,7 @@ body {
 			Where do you work?
 		  <input id = "addressInput" type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
 		  </label>
-		  <button type="button" onclick="submitLocation()">Center map here</button> 
+		  <button type="button" onclick="submitLocation()">Go</button> 
 		</span>
 	</div>
 	<div style="float:left; width:380px; height: 640px;" class="left-gutter">
