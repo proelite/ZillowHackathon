@@ -7,7 +7,7 @@
 		echo "Couldn't connect to database. Ask Phil for credentials.";
 	}
 
-	if(!mysqli_select_db($db, "test"))
+	if(!mysqli_select_db($db, "HackHousing"))
 	{
 		echo "Couldn't connect to database. Ask Phil for help.";
 	}
@@ -23,7 +23,7 @@
 	$cities = ["federal-way", "bellevue", "burien", "kent", "renton", "seattle"];
 	foreach($cities as $city)
 	{
-		$filename = "./SeattleSchoolData/schools-near-$city.xml";
+		$filename = "./Data/School/schools-near-$city.xml";
 		if (!file_exists($filename))
 		{
 			$filename = "./schools-near-$city.xml";
