@@ -33,20 +33,35 @@ Our team is comprised of:
 We made use of:
 
 Rental Data and Filters
+
 Fair Market Rents For The Section 8 Housing Assistance Payments Program: 
+
 	HUD Location Affordability Data
+
 	HUD Public Housing Buildings (Occupied/Unoccupied listings)
+
 	HUD Income Limit Data
+
 	Housing Authority Websites
+
 Address to Geographical Location:
+
 	Google Geocode/Reverse Geocode APIs
+
 Transit Time Data: 
+
 	General Transit Feed Specification (GTFS)
+
 	Google Map APIs
+
 	WalkScore TravelTime Widget & JS API
+
 Local crime data: 
+
 	data.seattle.gov
+
 School district data:
+
 	GreatSchools
 
 ## Contributing
