@@ -5,8 +5,9 @@ require_once('../db-connect.php');
 $buildingID = $_GET['NatBuildingID'];
 
 $query = "Select *";
-$query .= " FROM HUDHousingInfo";
-$query .= " WHERE NATIONAL_BUILDING_ID = ?";
+$query .= " FROM HUDHousingInfo, HAContactInfo";
+$query .= " WHERE HAName = HOUSING_AUTHORITY ";
+$query .= " AND NATIONAL_BUILDING_ID = ?";
 $stmt = mysqli_prepare($db, $query);
 
 mysqli_stmt_bind_param($stmt, 'i', $buildingID);
@@ -30,6 +31,7 @@ if ($queryResult->num_rows > 0)
 		echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td></tr>'; 
 		echo '<tr><td>Available Units</td><td>' . $availableUnits . '</td></tr>';
 		echo '<tr><td>Housing Authority</td><td>' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
+		echo '<tr><td>Phone Number</td><td>' . $row['ContactNumber'] . '</td></tr>';
 		echo '</td>';
 		
 		echo '</tr>';
