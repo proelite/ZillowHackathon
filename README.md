@@ -1,4 +1,4 @@
-# ZillowHackathon
+# FINDR (Find your '8')
 Repository for Zillow Hackathon Feb 2014
 
 Getting started
