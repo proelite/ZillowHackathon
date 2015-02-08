@@ -1,7 +1,5 @@
 <?php
 
-echo '<a href="/map-rentals"> Map </a> </br>';
-
 $input = $_GET;
 
 //var_dump($input);

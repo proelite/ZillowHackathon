@@ -346,8 +346,8 @@ body {
 		  <button type="button" onclick="submitLocation()">Center map here</button> 
 		</span>
 	</div>
-	<div style="float:left; width:240px; height: 640px;" class="left-gutter">
-		<iframe height="100%" width="240px" src="../list-rentals/?householdIncome=<?php echo $input['householdIncome'] . "&numberOfResidents=" . $input['numberOfResidents'] . "&location=" . $input['location'] ?>"></iframe>
+	<div style="float:left; width:380px; height: 640px;" class="left-gutter">
+		<iframe height="100%" width="380px" src="../list-rentals/?householdIncome=<?php echo $input['householdIncome'] . "&numberOfResidents=" . $input['numberOfResidents'] . "&location=" . $input['location'] ?>"></iframe>
 	</div>
 	<div style="width:auto;" id="map-canvas"></div>
   </body>
