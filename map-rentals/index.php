@@ -54,15 +54,15 @@ body {
 		
 	<script type="text/javascript">
 
-	  const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-	  const apikey = '&key=AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
+		const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+		const apikey = '&key=AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
 
-	  var initialLocation;
-	  var seattle = new google.maps.LatLng(47.61460,-122.31704);
-	  var browserSupportFlag =  new Boolean();
-	  var map;
-	  var widget;
-	  var loaded = false;
+	 	var initialLocation;
+		var seattle = new google.maps.LatLng(47.61460,-122.31704);
+		var browserSupportFlag =  new Boolean();
+		var map;
+		var widget;
+		var loaded = false;
 
 		var pointarray, heatmap;
 
@@ -81,7 +81,7 @@ body {
 		?>
 		];
 
-	  var buildings = 
+	 	var buildings = 
 		<?php
 			echo '\'{"Buildings":[';
 			if(isset($output["buildings"]) && !empty($output["buildings"]))
@@ -144,9 +144,14 @@ body {
 			echo ']}\';'
 		?>
 	  
-	  var buildingsJson;
+	  	var buildingsJson;
+	  	var infoWindow;
 
-	  function initialize() {
+	  	function initialize() {
+	  	infoWindow = new google.maps.InfoWindow(
+	  		{
+	  			content:"null"
+	  		});
 
 		initialLocation = seattle;
 
@@ -214,8 +219,9 @@ body {
 			var latlng = json.results[0].geometry.location;
 
 			map.setCenter(new google.maps.LatLng(latlng.lat, latlng.lng));
-			widget.setOrigin(''+latlng.lat+','+latlng.lng);
 			plotBuildings();
+
+			widget.setOrigin(''+latlng.lat+','+latlng.lng);
 		  }
 		  else
 		  {
@@ -233,26 +239,62 @@ body {
 	function plotBuildings()
 	{
 		var bounds = map.getBounds();
+
+		var tempM;
 		var i = 0;
 
-		for (var marker in markers)
+		for (i; i < markers.length; i++)
 		{
-			marker.setMap(null);
-			markers = [];
+			markers[i].setMap(null);
 		}
 
-		for (; i < buildingsJson.Buildings.length; i++)
+		google.maps.event.clearListeners(map, 'click');
+		markers = [];
+
+		for (i=0; i < buildingsJson.Buildings.length; i++)
 		{
 			var building = buildingsJson.Buildings[i];
 			var latlng = new google.maps.LatLng(building.lat, building.lng);
 			if (bounds.contains(latlng)) 
 			{
+				var name = building.buildingName;
+
+				if (name || name === "") 
+				{
+					name = building.projectName;
+				}
+
+				var address = building.streetAddress;
+				var totalunits = building.totalunits;
+				var totaloccupied = building.totaloccupied;
+
+				var house = 'house.png';
+
+				if (totaloccupied >= totalunits) 
+				{
+					house = 'fullhouse.png';
+				}
+
 				var marker = new google.maps.Marker({
 					position: latlng,
 					map: map,
 					title: building.buildingName,
-					icon: 'house.png'
+					icon: house
 				});
+
+				marker.html = '<div id="content">'+
+					      '<h1 id="firstHeading" class="firstHeading">'+name+'</h1>'+
+					      '<div id="bodyContent">'+
+					      '<p><b>'+address+'</b></p>'+
+					      '<p>'+totaloccupied+'/'+totalunits+' occupied</p>'+
+					      '</div>'+
+					      '</div>';
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infoWindow.setContent(this.html);
+			    	infoWindow.open(map, this);
+				});
+
 				markers.push(marker);
 			}
 		}

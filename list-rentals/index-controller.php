@@ -1,10 +1,10 @@
 <?php
 
-echo '<a href="../map.html"> Map </a> </br>';
+echo '<a href="/map-rentals"> Map </a> </br>';
 
 $input = $_GET;
 
-var_dump($input);
+//var_dump($input);
 
 // Validate inputs, if nothing set use defaults
 if( !isset($input['householdIncome']) || empty($input['householdIncome']) )
@@ -24,9 +24,6 @@ if ($numberOfResidents > 8)
 // Based on householdIncome, numberOfResidents, location, veteran and disabled, return an array of houses
 // XXX TODO FIND SOME HOUSES!
 
-$output = array( 0 => Array('Property Name' => 'Westside property', 'Typical Rent' => '1200 for your HH size'), 1 => Array('Property Name' => 'Westside property', 'Typical Rent' => '1200 for your HH size') );
-
-
 // Connect and setup db
 require_once('../db-connect.php');
 
@@ -39,11 +36,17 @@ if (!$selectDB)
    
 $query = "Select *";
 $query .= " FROM HUDHousingInfo, FamilySizeIncomeLimits";
-$query .= " (WHERE (HUDHousingInfo.Housing_Authority == FamilySizeIncomeLimits.HousingAuthorityName)";
-$query .= " AND (FamilySizeIncomeLimits.FamilySize == ))";
+$query .= " WHERE HUDHousingInfo.Housing_Authority = FamilySizeIncomeLimits.HousingAuthorityName";
+$query .= " AND FamilySizeIncomeLimits.FamilySize = ?";
+$query .= " AND FamilySizeIncomeLimits.IncomeLimit >= ?";
+$query .= " AND PERCENT_OCCUPIED < 100";
+$stmt = mysqli_prepare($db, $query);
+
+mysqli_stmt_bind_param($stmt, 'ii', $numberOfResidents, $input['householdIncome']);
+
+mysqli_stmt_execute($stmt);
+$buildingIDResult = mysqli_stmt_get_result($stmt);
    
-$buildingIDResult = mysqli_query($db, "Select * FROM HUDHousingInfo");   
-  
 if (!$buildingIDResult)
 {
 	 echo "Failed Query </br> ";
@@ -54,15 +57,33 @@ if (!$buildingIDResult)
 if ($buildingIDResult->num_rows > 0)
 {
 	echo '<table border ="1">';
-	echo '<tr> <th> Building ID </th> <th> Project Name </th> </tr>';
+	echo '<tr> <th> Project Name </th> <th> Building Name </th>';
+	echo '<th> Available Units </th> <th> Income Limit </th>';
+	echo '<th> Details </th> </tr>';
 	while ($row = $buildingIDResult->fetch_assoc())
 	{
-		echo "<tr>";
-		echo '<td>' . $row['NATIONAL_BUILDING_ID'] . '</td><td> ' . $row["PROJECT_NAME"] . '</td>';
+		$availableUnits = $row['TOTAL_UNITS'] - $row['TOTAL_OCCUPIED'];
+	
+		echo '<tr>';
+		echo '<td>' . $row['PROJECT_NAME'] . '</td><td> ' . $row['BUILDING_NAME'] . '</td>';
+		//echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td>'; 
+		echo '<td>' . $availableUnits . '</td>';
+		echo '<td>' . '$' . $row['IncomeLimit'] . '</td>';
+		
+		echo '<td> <form action="HousingDetails.php">';
+		echo '<button type="submit" value="' . $row['NATIONAL_BUILDING_ID'] . '" name="NatBuildingID">Details</button>';
+		echo '</form>';
+		
+		echo '</td>';
+		
 		echo '</tr>';
 	}
 
 	echo '</table>';
+}
+else
+{
+	echo "No HUD housing available at" . $input['householdIncome'] . "</br>";
 }
 
 require_once('../db-close.php');							  

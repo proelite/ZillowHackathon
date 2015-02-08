@@ -3,9 +3,6 @@
 // Put all of the "control" logic in the controller file. 
 // Leave this file (index.php) to just visuals and the view logics
 require("index-controller.php");
-
-print_r($input);
-print_r($output);
 ?>
 
 
