@@ -1,10 +1,6 @@
 <?php
 
-echo '<a href="../map.html"> Map </a> </br>';
-
 $input = $_GET;
-
-var_dump($input);
 
 // Validate inputs, if nothing set use defaults
 if( !isset($input['householdIncome']) || empty($input['householdIncome']) )
@@ -23,9 +19,6 @@ if ($numberOfResidents > 8)
 
 // Based on householdIncome, numberOfResidents, location, veteran and disabled, return an array of houses
 // XXX TODO FIND SOME HOUSES!
-
-$output = array( 0 => Array('Property Name' => 'Westside property', 'Typical Rent' => '1200 for your HH size'), 1 => Array('Property Name' => 'Westside property', 'Typical Rent' => '1200 for your HH size') );
-
 
 // Connect and setup db
 require_once('../db-connect.php');
@@ -53,16 +46,18 @@ if (!$buildingIDResult)
 
 if ($buildingIDResult->num_rows > 0)
 {
-	echo '<table border ="1">';
-	echo '<tr> <th> Building ID </th> <th> Project Name </th> </tr>';
 	while ($row = $buildingIDResult->fetch_assoc())
 	{
-		echo "<tr>";
-		echo '<td>' . $row['NATIONAL_BUILDING_ID'] . '</td><td> ' . $row["PROJECT_NAME"] . '</td>';
-		echo '</tr>';
+		$output["buildings"][] = Array ("projectName" => $row["PROJECT_NAME"], 
+			"buildingName" => $row["BUILDING_NAME"], 
+			"buildingId" => $row["NATIONAL_BUILDING_ID"], 
+			"streetAddress" => $row["STREET_ADDRESS"], 
+			"lat" => $row["LATITUDE"], 
+			"lng" => $row["LONGITUDE"], 
+			"totalunits" =>$row["TOTAL_UNITS"],
+			"totaloccupied" =>$row["TOTAL_OCCUPIED"]
+		);
 	}
-
-	echo '</table>';
 }
 
 require_once('../db-close.php');							  
