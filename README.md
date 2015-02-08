@@ -3,6 +3,9 @@ A single service that enlightens low income renters of renting assistance option
 
 This webservice was developed as part of the weekend (Feb 6 '15 - Feb 8 '15) hackathon 'Hack Housing' sponsored by Zillow, UW & HUD.
 
+![Homepage](Homepage.png)
+![Housing listing page](Screenshot.jpg)
+
 Getting started
 ==================
 1. Run ./setup-db.php
