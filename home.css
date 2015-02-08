@@ -12,15 +12,40 @@ body {
 	padding: 0;
 }
 
+.header {
+	box-sizing: border-box;
+	line-height: 0;
+	margin: 0 auto;
+	text-decoration: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	/* No support for these yet, use at own risk */
+	-o-user-select: none;
+	user-select: none;
+	width: 50%;
+	min-width: 640px;
+}
+
+.header img {
+	background-color: #0074e4;
+	border-radius: 0 0 4px 4px;
+	font-size: 0.750em;
+	line-height: 1.5em;
+	padding: 1em;
+	width: 150px;
+}
+
 .container {
 	background-color: #0074e4;
+	box-sizing: border-box;
 	border-radius: 4px;
 	font-size: 0.750em;
 	line-height: 1.5em;
-	margin: 100px auto;
+	margin: 80px auto 0;
 	padding: 20px;
 	width: 50%;
-	min-width: 600px;
+	min-width: 640px;
 }
 
 .container .input-label {
@@ -67,6 +92,8 @@ body {
 	box-sizing: border-box;
 	color: #FFF;
 	display: block;
+	font-size: 1.125em;
+	font-weight: bold;
 	margin: 0 auto;
 	padding: 1em;
 	text-align: center;
