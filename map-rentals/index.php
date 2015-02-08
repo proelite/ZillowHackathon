@@ -114,8 +114,14 @@ require("index-controller.php");
 		?>
 	  
 	  var buildingsJson;
+	  var infoWindow;
 
 	  function initialize() {
+
+	  	infoWindow = new google.maps.InfoWindow(
+	  		{
+	  			content:"null"
+	  		});
 
 		initialLocation = seattle;
 
@@ -183,8 +189,9 @@ require("index-controller.php");
 			var latlng = json.results[0].geometry.location;
 
 			map.setCenter(new google.maps.LatLng(latlng.lat, latlng.lng));
-			widget.setOrigin(''+latlng.lat+','+latlng.lng);
 			plotBuildings();
+
+			widget.setOrigin(''+latlng.lat+','+latlng.lng);
 		  }
 		  else
 		  {
@@ -202,26 +209,62 @@ require("index-controller.php");
 	function plotBuildings()
 	{
 		var bounds = map.getBounds();
+
+		var tempM;
 		var i = 0;
 
-		for (var marker in markers)
+		for (i; i < markers.length; i++)
 		{
-			marker.setMap(null);
-			markers = [];
+			markers[i].setMap(null);
 		}
 
-		for (; i < buildingsJson.Buildings.length; i++)
+		google.maps.event.clearListeners(map, 'click');
+		markers = [];
+
+		for (i=0; i < buildingsJson.Buildings.length; i++)
 		{
 			var building = buildingsJson.Buildings[i];
 			var latlng = new google.maps.LatLng(building.lat, building.lng);
 			if (bounds.contains(latlng)) 
 			{
+				var name = building.buildingName;
+
+				if (name || name === "") 
+				{
+					name = building.projectName;
+				}
+
+				var address = building.streetAddress;
+				var totalunits = building.totalunits;
+				var totaloccupied = building.totaloccupied;
+
+				var house = 'house.png';
+
+				if (totaloccupied >= totalunits) 
+				{
+					house = 'fullhouse.png';
+				}
+
 				var marker = new google.maps.Marker({
 					position: latlng,
 					map: map,
 					title: building.buildingName,
-					icon: 'house.png'
+					icon: house
 				});
+
+				marker.html = '<div id="content">'+
+					      '<h1 id="firstHeading" class="firstHeading">'+name+'</h1>'+
+					      '<div id="bodyContent">'+
+					      '<p><b>'+address+'</b></p>'+
+					      '<p>'+totaloccupied+'/'+totalunits+' occupied</p>'+
+					      '</div>'+
+					      '</div>';
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infoWindow.setContent(this.html);
+			    	infoWindow.open(map, this);
+				});
+
 				markers.push(marker);
 			}
 		}
