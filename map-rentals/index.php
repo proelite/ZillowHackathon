@@ -187,6 +187,8 @@ body {
 
 		buildingsJson = JSON.parse(buildings);
 
+		plotCenter(initialLocation);
+
 		google.maps.event.addListenerOnce(map, 'idle', function(){
 			loaded = true;
 			plotBuildings();
@@ -207,6 +209,8 @@ body {
 	  map.setCenter(initialLocation);
 	}
 
+	var markers = [];
+
 	function submitLocation() 
 	{
 	  if (loaded) 
@@ -216,9 +220,13 @@ body {
 		  var json = JSON.parse(httpGet(url));
 		  if (json.status=="OK") 
 		  {
-			var latlng = json.results[0].geometry.location;
+		  	clearMap();
 
-			map.setCenter(new google.maps.LatLng(latlng.lat, latlng.lng));
+			var latlng = json.results[0].geometry.location;
+			var center = new google.maps.LatLng(latlng.lat, latlng.lng);
+
+			map.setCenter(center);
+			plotCenter(center);
 			plotBuildings();
 
 			widget.setOrigin(''+latlng.lat+','+latlng.lng);
@@ -234,13 +242,8 @@ body {
 	  }
 	}
 
-  	var markers = [];
-
-	function plotBuildings()
+	function clearMap()
 	{
-		var bounds = map.getBounds();
-
-		var tempM;
 		var i = 0;
 
 		for (i; i < markers.length; i++)
@@ -250,8 +253,25 @@ body {
 
 		google.maps.event.clearListeners(map, 'click');
 		markers = [];
+	}
 
-		for (i=0; i < buildingsJson.Buildings.length; i++)
+	function plotCenter(latlng) 
+	{
+		var marker = new google.maps.Marker({
+					position: latlng,
+					map: map,
+					title: 'Work'
+				});
+		markers.push(marker);		
+	}
+
+	function plotBuildings()
+	{
+		var bounds = map.getBounds();
+		var tempM;
+		var i=0;
+
+		for (i; i < buildingsJson.Buildings.length; i++)
 		{
 			var building = buildingsJson.Buildings[i];
 			var latlng = new google.maps.LatLng(building.lat, building.lng);
