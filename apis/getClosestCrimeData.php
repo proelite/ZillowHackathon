@@ -57,6 +57,7 @@ function getClosestCrimeData($lat, $lon) {
 	$cache = new CrimeDataCache();
 
 	$cachedVal = $cache->get($lat, $lon);
+	set_time_limit(0); //unlimited
 	if( !empty($cachedVal) )
 	{
 		return $cache->get($lat,$lon);
