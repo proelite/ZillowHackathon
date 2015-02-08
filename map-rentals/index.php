@@ -11,6 +11,37 @@ require("index-controller.php");
   <head>
 	<style type="text/css">
 	  html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+	  
+	  
+body {
+	background-color: #EEE;
+	color: #444;
+	font-size: 1em;
+	font-family: Helvetica;
+}
+
+	  
+	  .header {
+	line-height: 0;
+	margin: 0 auto;
+	text-decoration: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	/* No support for these yet, use at own risk */
+	-o-user-select: none;
+	user-select: none;
+	min-width: 640px;
+}
+
+.header img {
+	background-color: #0074e4;
+	border-radius: 0 0 4px 4px;
+	font-size: 0.750em;
+	line-height: 1.5em;
+	padding: 1em;
+	width: 150px;
+}
 	</style>
 
 	<script type="text/javascript"
@@ -162,7 +193,7 @@ require("index-controller.php");
 			});
 
 			heatmap.setMap(map);  
-			heatmap.set('radius', 20);
+			heatmap.set('radius', 50);
 		});
 	}
 
@@ -241,14 +272,24 @@ require("index-controller.php");
 
   </head>
   <body onload="initialize()">
-	<div class="container">
-		  <label class="input-label">
+  	<div class="header">
+		<a href="/index.html">
+			<img src="/Findr8-mix.png">
+		</a>
+		<span class="container">
+		  <label class="input-label" style="margin: 5px">
 			Where do you work?
 		  <input id = "addressInput" type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
 		  </label>
-		  <button type="button" onclick="submitLocation()">See Homes</button> 
+		  <button type="button" onclick="submitLocation()">Center map here</button> 
+		</span>
 	</div>
-	<div id="map-canvas"></div>
+	<div style="float:left; width:120px;" class="left-gutter">
+		<table>
+			<tr><td></td></tr>
+		</table>
+	</div>
+	<div style="width:auto;" id="map-canvas"></div>
   </body>
 </html>
 
