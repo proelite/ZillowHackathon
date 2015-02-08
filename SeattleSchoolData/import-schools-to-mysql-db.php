@@ -16,8 +16,8 @@
 	$query = "DROP TABLE IF EXISTS Schools";
 	mysqli_query($db, $query);
 	
-	$query = "CREATE TABLE Schools (gsId INT(6) UNSIGNED PRIMARY KEY, name VARCHAR(64), type VARCHAR(30), gradeRange VARCHAR(30), lat DOUBLE, lon DOUBLE)";
-	mysqli_query($db, $query);
+	$query = "CREATE TABLE Schools (gsId INT(6) UNSIGNED PRIMARY KEY, name VARCHAR(64), parentRating INT(3), type VARCHAR(30), gradeRange VARCHAR(30), lat DOUBLE, lon DOUBLE)";
+	mysqli_query($db, $query) or die("Couldn't create Schools table");
 
 	// Dump school data into our database
 	$cities = ["federal-way", "bellevue", "burien", "kent", "renton", "seattle"];
@@ -42,9 +42,10 @@
 				$name = mysqli_real_escape_string($db, $school->name);
 				$type = mysqli_real_escape_string($db, $school->type);
 				$gradeRange = mysqli_real_escape_string($db, $school->gradeRange);
+				$parentRating = mysqli_real_escape_string($db, $school->parentRating);
 				$lat = $school->lat;
 				$lon = $school->lon;
-				$query = "INSERT INTO Schools (gsId, name, type, gradeRange, lat, lon) VALUES ($gsId, '$name', '$type', '$gradeRange', $lat, $lon);";
+				$query = "INSERT INTO Schools (gsId, name, parentRating, type, gradeRange, lat, lon) VALUES ($gsId, '$name', $parentRating, '$type', '$gradeRange', $lat, $lon);";
 				mysqli_query($db, $query);
 			}
 		}
