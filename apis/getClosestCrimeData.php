@@ -13,6 +13,45 @@ function getClosestCrimeData($lat, $lon) {
 	}
 	return $offenses;
 }
+
+// Returns the weighted map of various offenses
+function getCrimeDataWeights() {
+    $crimeWeightMap = array(
+        "ASSAULT" => 10,
+        "BURGLARY" => 9,
+        "PROPERTY DAMAGE" => 8,
+        "STOLEN PROPERTY" => 6,
+        "THREATS" => 7,
+        "VEHICLE THEFT" => 6,
+        "BIKE THEFT" => 3,
+        "FRAUD" => 5,
+        "CAR PROWL" => 4,
+        "WARRANT ARREST" => 2,
+        "OTHER PROPERTY" => 1,
+        "DISTURBANCE" => 3,
+        "ROBBERY" => 8,
+        "MAIL THEFT" => 3,
+        "LOST PROPERTY" => 1,
+        "OTHER" => 1,
+        "NARCOTICS" => 8,
+        "TRESPASS" => 5,
+        "PICKPOCKET" => 4,
+        "WEAPON" => 7,
+        "OBSTRUCT" => 1,
+        "DUI" => 2,
+        "LIQUOR VIOLATION" => 1,
+        "TRAFFIC" => 3,
+        "SHOPLIFTING" => 1,
+        "COUNTERFEIT" => 1,
+        "DISPUTE" => 2,
+        "INJURY" => 3,
+        "EMBEZZLE" => 2,
+        "RECKLESS BURNING" => 2,
+        "PURSE SNATCH" => 4
+    );
+    return $crimeWeightMap;
+}
+
 if (isset($_GET['json']) && $_GET['json'] == 1)
 {
 	$lat = isset($_GET['lat']) ? $_GET['lat'] : 0;
