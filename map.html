@@ -9,30 +9,75 @@
     </script>
     
     <script type="text/javascript"
-      src="http://apicdn.walkscore.com/api/v1/traveltime_widget/js?wsid=3237b59f59174541a76291922c4137df">
+      src="http://apicdn.walkscore.com/api/v1/traveltime_widget/js?wsid=f64c1f8a65290fca0c6cc0442dfe59b5">
     </script>
         
     <script type="text/javascript">
+
+      const geocodeapi = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+      const apikey = 'AIzaSyC16FVIVK4DIVy_p6UwyBaekvYcgB_6OnM';
+
+      var initialLocation;
+      var seattle = new google.maps.LatLng(47.61460,-122.31704);
+      var browserSupportFlag =  new Boolean();
+      var map;
+      var widget;
+
       function initialize() {
-        
+
+        initialLocation = seattle;
+
         var mapOptions = {
-          mapTypeId: google.maps.MapTypeId.ROADMAP, center: new google.maps.LatLng(47.61460,-122.31704), zoom: 13, scrollwheel : false 
+          mapTypeId: google.maps.MapTypeId.ROADMAP, center: initialLocation, zoom: 8, scrollwheel : false 
         };
         
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
+        map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
 
-        var widget = new walkscore.TravelTimeWidget({
+        // Try W3C Geolocation (Preferred)
+        if(navigator.geolocation) {
+          browserSupportFlag = true;
+          navigator.geolocation.getCurrentPosition(function(position) {
+            initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            map.setCenter(initialLocation);
+          }, function() {
+            handleNoGeolocation(browserSupportFlag);
+          });
+        }
+        // Browser doesn't support Geolocation
+        else {
+          browserSupportFlag = false;
+          handleNoGeolocation(browserSupportFlag);
+        }
+
+        widget = new walkscore.TravelTimeWidget({
           map    : map,
-          origin : '47.61460,-122.31704',
+          origin : ''+initialLocation.lat()+','+initialLocation.lng(),
           show   : true,
           mode   : walkscore.TravelTime.Mode.DRIVE
         });
       }
-      google.maps.event.addDomListener(window, 'load', initialize);
+
+    function handleNoGeolocation(errorFlag) {
+      initialLocation = seattle;
+      map.setCenter(initialLocation);
+    }
+
+    function submitLocation() 
+    {
+
+    }
+
     </script>
   </head>
-  <body>
-<div id="map-canvas"></div>
+  <body onload="initialize()">
+    <div class="container">
+          <label class="input-label">
+            Where do you work?
+          <input type="text" name="location" placeholder="Enter a city, address, school, business, etc.">
+          </label>
+          <button type="button" onclick="submitLocation()">See Homes</button> 
+    </div>
+    <div id="map-canvas"></div>
   </body>
 </html>
