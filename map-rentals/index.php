@@ -120,7 +120,7 @@ require("index-controller.php");
 		initialLocation = seattle;
 
 		var mapOptions = {
-		  mapTypeId: google.maps.MapTypeId.ROADMAP, center: initialLocation, zoom: 4, scrollwheel : false 
+		  mapTypeId: google.maps.MapTypeId.ROADMAP, center: initialLocation, zoom: 14, scrollwheel : false 
 		};
 		
 		map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -146,7 +146,7 @@ require("index-controller.php");
 		  map    : map,
 		  origin : ''+initialLocation.lat()+','+initialLocation.lng(),
 		  show   : true,
-		  mode   : walkscore.TravelTime.Mode.DRIVE
+		  mode   : walkscore.TravelTime.Mode.TRANSIT
 		});
 
 		buildingsJson = JSON.parse(buildings);
@@ -154,17 +154,17 @@ require("index-controller.php");
 		google.maps.event.addListenerOnce(map, 'idle', function(){
 			loaded = true;
 			plotBuildings();
+
+			var pointArray = new google.maps.MVCArray(crimeData);
+
+			heatmap = new google.maps.visualization.HeatmapLayer({
+				data: pointArray
+			});
+
+			heatmap.setMap(map);  
+			heatmap.set('radius', 20);
 		});
-
-		var pointArray = new google.maps.MVCArray(crimeData);
-
-		heatmap = new google.maps.visualization.HeatmapLayer({
-			data: pointArray
-		});
-
-		heatmap.setMap(map);  
-		heatmap.set('radius', 20);
-	 }
+	}
 
 	function handleNoGeolocation(errorFlag) {
 	  initialLocation = seattle;
@@ -197,10 +197,18 @@ require("index-controller.php");
 	  }
 	}
 
+  	var markers = [];
+
 	function plotBuildings()
 	{
 		var bounds = map.getBounds();
 		var i = 0;
+
+		for (var marker in markers)
+		{
+			marker.setMap(null);
+			markers = [];
+		}
 
 		for (; i < buildingsJson.Buildings.length; i++)
 		{
@@ -211,8 +219,10 @@ require("index-controller.php");
 				var marker = new google.maps.Marker({
 					position: latlng,
 					map: map,
-					title: building.buildingName
+					title: building.buildingName,
+					icon: 'house.png'
 				});
+				markers.push(marker);
 			}
 		}
 	}
