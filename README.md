@@ -1,5 +1,6 @@
 # FINDR (Find your '8')
-Repository for Zillow Hackathon Feb 2014
+A single service that enlightens low income renters of renting assistance options and searches for affordable homes within transit time and neighborhood safety constraints.
+This webservice was developed as part of the weekend (Feb 6 '15 - Feb 8 '15) hackathon 'Hack Housing' sponsored by Zillow, UW & HUD.
 
 Getting started
 ==================
