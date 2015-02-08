@@ -335,7 +335,7 @@ body {
   </head>
   <body onload="initialize()">
   	<div class="header">
-		<a href="/index.html">
+		<a href="../index.html">
 			<img src="../Findr8-mix.png">
 		</a>
 		<span class="container">
@@ -347,7 +347,7 @@ body {
 		</span>
 	</div>
 	<div style="float:left; width:380px; height: 640px;" class="left-gutter">
-		<iframe height="100%" width="380px" src="../list-rentals/?householdIncome=<?php echo $input['householdIncome'] . "&numberOfResidents=" . $input['numberOfResidents'] . "&location=" . $input['location'] ?>"></iframe>
+		<iframe target="_blank" height="100%" width="380px" src="../list-rentals/?householdIncome=<?php echo $input['householdIncome'] . "&numberOfResidents=" . $input['numberOfResidents'] . "&location=" . $input['location'] ?>"></iframe>
 	</div>
 	<div style="width:auto;" id="map-canvas"></div>
   </body>
