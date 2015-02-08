@@ -27,19 +27,19 @@ if ($queryResult->num_rows > 0)
 	
 		$schoolRow = getNearestSchoolScore($row['LATITUDE'], $row['LONGITUDE']);
 	
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Project Name</td>';
-		echo '<td>' . $row['PROJECT_NAME'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Project Name</td>';
+		echo '<td style="padding: 1em;">' . $row['PROJECT_NAME'] . '</td></tr>';
 		
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Building Name</td> <td> ' . $row['BUILDING_NAME'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Building Name</td> <td style="padding: 1em;"> ' . $row['BUILDING_NAME'] . '</td></tr>';
 		
-		echo '<tr style="border-bottom: 1px solid #ccc"><td style="color: #0074e4; font-weight: bold;">Address Name</td>';
-		echo '<td>' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td></tr>'; 
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Available Units</td><td>' . $availableUnits . '</td></tr>';
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Total Units</td><td>' . $row['TOTAL_UNITS'] . '</td></tr>';
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Nearest School </td><td>' . $schoolRow['0'] . '</td></tr>';
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">School Score </td><td>' . $schoolRow['1'] . '</td></tr>';
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Housing Authority</td><td>' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
-		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold;">Phone Number</td><td>' . $row['ContactNumber'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Address Name</td>';
+		echo '<td style="padding: 1em;">' . $row['STREET_ADDRESS'] . ' ' . $row['CITY'] . ', ' . $row['STATE'] . ' ' . $row['ZIP5'] . '</td></tr>'; 
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Available Units</td><td style="padding: 1em;">' . $availableUnits . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Total Units</td><td style="padding: 1em;">' . $row['TOTAL_UNITS'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Nearest School </td><td style="padding: 1em;">' . $schoolRow['0'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">School Score </td><td style="padding: 1em;">' . $schoolRow['1'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Housing Authority</td><td style="padding: 1em;">' . $row['HOUSING_AUTHORITY'] . '</td></tr>';
+		echo '<tr style="border-bottom: 1px solid #ccc;"><td style="color: #0074e4; font-weight: bold; padding: 1em;">Phone Number</td><td style="padding: 1em;">' . $row['ContactNumber'] . '</td></tr>';
 		echo '</td>';
 		echo '</tr>';
 	}
