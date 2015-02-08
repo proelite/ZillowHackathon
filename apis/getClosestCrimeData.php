@@ -1,5 +1,67 @@
 <?php
+class CrimeDataCache
+{
+	private $db;
+	
+	function __construct()
+	{
+		$this->db = mysqli_connect("localhost", "root");
+
+		if (mysqli_connect_errno()) 
+		{
+			echo "Couldn't connect to database. Ask Phil for credentials.";
+		}
+
+		if(!mysqli_select_db($this->db, "HackHousing"))
+		{
+			echo "Couldn't connect to database. Ask Phil for help.";
+		}
+	}
+	
+	function __destruct()
+	{
+		if(isset($this->db))
+			mysqli_close($this->db);
+	}
+	
+	private function ensureCache()
+	{
+		$query = "CREATE TABLE CrimeDataCache(lat DOUBLE, lon DOUBLE, crimeData LONGBLOB)";
+		mysqli_query($this->db, $query);
+	}
+	
+	public function get($lat, $lon)
+	{
+		$this->ensureCache();
+		
+		$query = "SELECT crimeData FROM CrimeDataCache WHERE lat=$lat AND lon=$lon";
+		$result = mysqli_query($this->db, $query);
+		if(!$result) return null;
+		
+		return json_decode(mysqli_fetch_array($result)[0]);
+	}
+	
+	public function set($lat, $lon, $crimeData)
+	{
+		$this->ensureCache();
+		
+		$crimeDataJson = json_encode($crimeData);
+		
+		$query = "INSERT INTO CrimeDataCache(lat, lon, crimeData) VALUES ($lat, $lon, '$crimeDataJson')";
+		
+		mysqli_query($this->db, $query) or die("Error");
+	}
+};
+
 function getClosestCrimeData($lat, $lon) {
+	$cache = new CrimeDataCache();
+
+	$cachedVal = $cache->get($lat, $lon);
+	if( !empty($cachedVal) )
+	{
+		return $cache->get($lat,$lon);
+	}
+	
 	$jsonurl = "https://data.seattle.gov/resource/7ais-f98f.json?\$where=within_circle(location,$lat,$lon,100)";
 	$json = file_get_contents($jsonurl);
 	$j = json_decode($json);
@@ -11,6 +73,9 @@ function getClosestCrimeData($lat, $lon) {
 			$offenses[$item->summarized_offense_description] = 1;
 		}
 	}
+	
+	$cache->set($lat, $lon, $offenses);
+	
 	return $offenses;
 }
 
