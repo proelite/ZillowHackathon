@@ -6,22 +6,58 @@ This webservice was developed as part of the weekend (Feb 6 '15 - Feb 8 '15) hac
 ![Homepage](Homepage.png)
 ![Housing listing page](Screenshot.jpg)
 
-Getting started
-==================
-1. Run ./setup-db.php
-2. http://localhost 
-3. ??/
+## Challenge and Approach
 
-TO USE SCHOOL API
-==================
-1. As a REST API (returns json)- Eg; http://localhost/apis/getNearestSchool.php?json=1?lat=15?lon=14
-2. In your code, <?php include('apis/getNearestSchool.php'); ?> and then call getNearestSchoolScore($lat, $lon);
-3. In both cases, an array is return with only two values, the name of the school and the parentRating (0-5)
+Our submission is for [lower-income renters].
 
-TO USE CRIME DATA API
-=====================
-1. As a REST API (returns json) - Eg: http://localhost/apis/getClosestCrimeData.php?json=1&lat=47.62085748029149&lon=-122.3361831197085
-2. In your code, <?php include('apis/getClosestCrimeData.php'); ?> and then call getClosestCrimeData($lat, $lon);
-3. In both cases, an array is returned with key as the Offense description and the count of that offense as the array value.
+Our approach for satisfying this challenge was to:
 
-#hackhousing
+- Identify issues that lower-income	face when searching for new homes to lease
+- Look at relevant programs, APIs and data to come up with solution candidates.
+- Pick the best candidate and implement the technical solution. 
+
+Once we did that, we knew we were guaranteed to win!
+
+## Team Members
+
+Our team is comprised of:
+
+- [@pnapieralski](http://github.com/pnapieralski) - Local wizard
+- [@proelite](http://github.com/proelite) - Local professional troll
+- [@tarasaur](http://github.com/tarasaur) - Local prehistoric lizard
+- [@kr0y](http://github.com/kr0y) - Local gossiper
+- [@vijay267](http://github.com/vijay267) - Local class clown
+
+## Technologies, APIs, and Datasets Utilized
+
+We made use of:
+
+Rental Data and Filters
+Fair Market Rents For The Section 8 Housing Assistance Payments Program
+	HUD Location Affordability Data
+	HUD Public Housing Buildings (Occupied/Unoccupied listings)
+	HUD Income Limit Data
+	Housing Authority Websites
+Address to Geographical Location
+	Google Geocode/Reverse Geocode APIs
+Transit Time Data
+	General Transit Feed Specification (GTFS)
+	Google Map APIs
+	WalkScore TravelTime Widget & JS API
+Local crime data
+	data.seattle.gov
+School district data
+	GreatSchools
+
+## Contributing
+
+In order to build and run our app:
+
+1. Install xamp
+2. Clone repository in root folder of the local host 
+3. Goto http://localhost to check the state of your xamp server
+4. Run http://localhost/setup-db.php
+5. View homepage
+6. Profit
+
+Our code is licensed under the [MIT License](LICENSE.md). Pull requests will be accepted to this repo, pending review and approval.
